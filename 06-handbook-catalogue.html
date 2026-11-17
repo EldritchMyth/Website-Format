@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Handbook catalogue</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap');
+:root{--bg:#171c20;--panel:#252d33;--ink:#f2ebdd;--gold:#c6a76b;--teal:#78b8b0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Sans 3',Arial,sans-serif}main{max-width:1100px;margin:auto;padding:24px}h1,h2,h3{font-family:Cinzel,Georgia,serif;line-height:1.25}h2{font-size:28px;margin:0 0 16px}h3{font-size:21px;margin:0 0 10px}p{margin:0 0 16px}.muted,small{color:#c9c6bd}.tag{color:var(--teal);font-size:14px;letter-spacing:.08em;text-transform:uppercase}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px}.card,details{background:var(--panel);border:1px solid #756548;border-radius:8px;padding:22px;min-width:0}.card img{width:100%;height:160px;object-fit:cover;border-radius:4px;margin-bottom:14px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 18px;border:1px solid var(--gold);border-radius:4px;color:var(--ink);background:var(--bg);text-decoration:none;font:600 16px 'Source Sans 3',Arial,sans-serif;cursor:pointer}.btn:hover{background:#394044;border-color:var(--teal)}a{color:var(--teal)}:focus-visible{outline:3px solid var(--teal);outline-offset:4px}.filters{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}.filters label{flex:1;min-width:min(100%,180px)}input,select{display:block;width:100%;padding:12px;border:1px solid var(--gold);border-radius:4px;background:var(--panel);color:var(--ink);font:inherit;min-height:46px}.notice{border-left:3px solid var(--teal);padding-left:14px}.actions{display:flex;flex-wrap:wrap;gap:12px}details{margin-bottom:12px}summary{cursor:pointer;font-family:Cinzel,Georgia,serif;min-height:44px;padding:8px 0}details p{margin:12px 0}.art{height:120px;background:radial-gradient(ellipse at 70% 90%,#78b8b055,transparent 60%),linear-gradient(135deg,#171c20,#3b453f);border:1px solid #756548;border-radius:4px;margin-bottom:18px;display:grid;place-items:center;color:var(--gold);font-size:40px}[hidden]{display:none!important}@media(max-width:500px){main{padding:16px}h2{font-size:24px}.card{padding:18px}}
+
+</style></head><body><main>
+<h2>The Farwalker’s Handbook</h2><p class="muted">Guides for the road ahead.</p><div id="books" class="grid"></div>
+</main>
+<script>
+const root=document.querySelector('main');
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function urlOK(url){try{return /^https?:$/.test(new URL(url).protocol);}catch{return false;}}
+function link(text,url){if(!urlOK(url))return el('small','Add a destination URL to enable this link.');const a=el('a',text+' ↗','btn');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',text+' (opens in a new tab)');return a;}
+function image(card,url,alt){if(!urlOK(url))return;const img=el('img');img.src=url;img.alt=alt;img.loading='lazy';img.addEventListener('error',()=>{img.replaceWith(el('small','Image unavailable — check the image URL.'));});card.append(img);}
+// EDIT: url may be a published PDF URL or an accessible Google Drive viewing link.
+const books=[{title:'Example handbook entry',description:'Describe what this guide helps the reader do.',category:'Reference',image:'',url:''},{title:'Example field guide',description:'Replace with a second PDF, description, and optional cover image.',category:'Field guide',image:'',url:''}];
+for(const b of books){const card=el('article',undefined,'card');image(card,b.image,b.title+' cover');card.append(el('p',b.category,'tag'),el('h3',b.title),el('p',b.description),link('Read guide',b.url));document.querySelector('#books').append(card);}
+</script>
+</body></html>
