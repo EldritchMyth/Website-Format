@@ -14,7 +14,7 @@ function urlOK(url){try{return /^https?:$/.test(new URL(url).protocol);}catch{re
 function link(text,url){if(!urlOK(url))return el('small','Add a destination URL to enable this link.');const a=el('a',text+' ↗','btn');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',text+' (opens in a new tab)');return a;}
 function image(card,url,alt){if(!urlOK(url))return;const img=el('img');img.src=url;img.alt=alt;img.loading='lazy';img.addEventListener('error',()=>{img.replaceWith(el('small','Image unavailable — check the image URL.'));});card.append(img);}
 // EDIT manually after sessions. This panel does not sync with any external source.
-const status={location:'Add current location',updated:'Add last-updated date',recapTitle:'Add latest session title',recapURL:'',objectives:['Add a player-known objective','Add a second objective']};
+const status={location:'The Wyrd',updated:'Day 5 of Yoralan',recapTitle:'Around the Daughters Fire',recapURL:'',objectives:['Hunt the Sovereign','Find the Mother']};
 const box=document.querySelector('#status');box.append(el('p','Last updated: '+status.updated,'tag'),el('h3',status.location),el('p',status.recapTitle));const list=el('ul');status.objectives.forEach(o=>list.append(el('li',o)));box.append(list,link('Read the latest recap',status.recapURL));
 </script>
 </body></html>
